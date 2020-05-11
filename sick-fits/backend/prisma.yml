@@ -1,2 +1,7 @@
-endpoint: https://us1.prisma.sh/jeremiah-damiron/sick-fits-app-jdamiron/dev
-datamodel: datamodel.prisma
+#endpoint: ${env:PRISMA_ENDPOINT}
+endpoint: https://us1.prisma.sh/jeremiah-damiron/sick-fits-backend2/dev
+datamodel: datamodel.graphql
+# secret: ${env:PRISMA_SECRET}
+hooks:
+  post-deploy:
+    - graphql get-schema -p prisma
