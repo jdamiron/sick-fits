@@ -1,13 +1,13 @@
-import React from 'react';
-import StripeCheckout from 'react-stripe-checkout';
-import { Mutation } from 'react-apollo';
-import Router from 'next/router';
-import NProgress from 'nprogress';
-import PropTypes from 'prop-types';
-import gql from 'graphql-tag';
-import calcTotalPrice from '../lib/calcTotalPrice';
-import Error from './ErrorMessage';
-import User, { CURRENT_USER_QUERY } from './User';
+import React from "react";
+import StripeCheckout from "react-stripe-checkout";
+import { Mutation } from "react-apollo";
+import Router from "next/router";
+import NProgress from "nprogress";
+import PropTypes from "prop-types";
+import gql from "graphql-tag";
+import calcTotalPrice from "../lib/calcTotalPrice";
+import Error from "./ErrorMessage";
+import User, { CURRENT_USER_QUERY } from "./User";
 
 const CREATE_ORDER_MUTATION = gql`
   mutation createOrder($token: String!) {
@@ -35,11 +35,11 @@ class TakeMyMoney extends React.Component {
       variables: {
         token: res.id,
       },
-    }).catch(err => {
+    }).catch((err) => {
       alert(err.message);
     });
     Router.push({
-      pathname: '/order',
+      pathname: "/order",
       query: { id: order.data.createOrder.id },
     });
   };
@@ -47,22 +47,25 @@ class TakeMyMoney extends React.Component {
     return (
       <User>
         {({ data: { me }, loading }) => {
+          console.log(me.cart);
           if (loading) return null;
           return (
             <Mutation
               mutation={CREATE_ORDER_MUTATION}
               refetchQueries={[{ query: CURRENT_USER_QUERY }]}
             >
-              {createOrder => (
+              {(createOrder) => (
                 <StripeCheckout
                   amount={calcTotalPrice(me.cart)}
                   name="Sick Fits"
                   description={`Order of ${totalItems(me.cart)} items!`}
-                  image={me.cart.length && me.cart[0].item && me.cart[0].item.image}
-                  stripeKey="pk_test_Vtknn6vSdcZWSG2JWvEiWSqC"
+                  image={
+                    me.cart.length && me.cart[0].item && me.cart[0].item.image
+                  }
+                  stripeKey="pk_test_i2nH7uymr9C6vGnvRqM61IhO00g2aFI49n"
                   currency="USD"
                   email={me.email}
-                  token={res => this.onToken(res, createOrder)}
+                  token={(res) => this.onToken(res, createOrder)}
                 >
                   {this.props.children}
                 </StripeCheckout>

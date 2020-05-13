@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Query } from 'react-apollo';
-import { format } from 'date-fns';
-import Head from 'next/head';
-import gql from 'graphql-tag';
-import formatMoney from '../lib/formatMoney';
-import Error from './ErrorMessage';
-import OrderStyles from './styles/OrderStyles';
+import React from "react";
+import PropTypes from "prop-types";
+import { Query } from "react-apollo";
+import { format } from "date-fns";
+import Head from "next/head";
+import gql from "graphql-tag";
+import formatMoney from "../lib/formatMoney";
+import Error from "./ErrorMessage";
+import OrderStyles from "./styles/OrderStyles";
 
 const SINGLE_ORDER_QUERY = gql`
   query SINGLE_ORDER_QUERY($id: ID!) {
@@ -56,7 +56,11 @@ class Order extends React.Component {
               </p>
               <p>
                 <span>Date</span>
-                <span>{format(order.createdAt, 'MMMM d, YYYY h:mm a', { awareOfUnicodeTokens: true })}</span>
+                <span>
+                  {format(order.createdAt, "MMMM d, YYYY h:mm a", {
+                    awareOfUnicodeTokens: true,
+                  })}
+                </span>
               </p>
               <p>
                 <span>Order Total</span>
@@ -67,7 +71,7 @@ class Order extends React.Component {
                 <span>{order.items.length}</span>
               </p>
               <div className="items">
-                {order.items.map(item => (
+                {order.items.map((item) => (
                   <div className="order-item" key={item.id}>
                     <img src={item.image} alt={item.title} />
                     <div className="item-details">
