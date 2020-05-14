@@ -1,6 +1,6 @@
 #endpoint: ${env:PRISMA_ENDPOINT}
-#endpoint: https://us1.prisma.sh/jeremiah-damiron/sick-fits-backend2/dev
-endpoint: https://firefits-prod-aac282d366.herokuapp.com/fire-fits-prod/prod
+endpoint: https://us1.prisma.sh/jeremiah-damiron/sick-fits-backend2/dev
+# endpoint: https://firefits-prod-aac282d366.herokuapp.com/fire-fits-prod/prod
 datamodel: datamodel.graphql
 secret: ${env:PRISMA_SECRET}
 hooks:
